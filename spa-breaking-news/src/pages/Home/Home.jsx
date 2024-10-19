@@ -1,10 +1,11 @@
 import { Navbar } from "../../components/navbar/Navbar";
+import { Button } from "../../components/navbar/NavbarStyled";
 
 export default function Home() {
   return (
     <>
       <Navbar />
-      <h1>Olá, Home</h1>
+      <Button>Olá, Home</Button>
     </>
   );
 }
