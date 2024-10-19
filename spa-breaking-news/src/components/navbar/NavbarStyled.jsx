@@ -9,6 +9,7 @@ export const Nav = styled.nav`
   background-color: #fff;
   z-index: 1;
   box-shadow: rgba(17, 17, 26, 0.1) 0px 1px 0px;
+  margin-bottom: 15px;
 `;
 
 export const ImgLogo = styled.img`
