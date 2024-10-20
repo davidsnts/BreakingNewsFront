@@ -39,8 +39,8 @@ export const InputSpace = styled.div`
     cursor: pointer;
     transition: 0.4s;
 
-    :hover{
-      background-color:#757575;
+    :hover {
+      background-color: #757575;
       color: #f5f5f5;
     }
   }
@@ -80,3 +80,13 @@ export const Button = styled.button`
     background-color: #0a86af;
   }
 `;
+
+export const ErrorSpam = styled.span`
+  background-color: #ffaeae;
+  color:#9e0000;
+  padding:1rem;
+  display:flex;
+  justify-content: center;
+  font-size: 1.1rem;
+  font-weight:bold;
+`
