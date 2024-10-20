@@ -9,6 +9,6 @@ export async function getAllPosts() {
 
 
 export async function getTopPost() {
-  const response = await axios.get(`${baseURL}/posts`);    
+  const response = await axios.get(`${baseURL}/posts/top`);    
   return response;
 }
