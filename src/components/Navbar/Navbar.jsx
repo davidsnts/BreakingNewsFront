@@ -1,20 +1,30 @@
 import { Outlet, useNavigate, Link } from "react-router-dom";
 import logo from "../../images/LogoBN.png";
-import { Button, ErrorSpam, ImageLogo, InputSpace, Nav } from "./NavbarStyled";
+import { ErrorSpam, ImageLogo, InputSpace, Nav } from "./NavbarStyled";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { Button } from "../Button/button";
 
 const searchSchema = z.object({
-  title: z.string().trim().min(1 , "A pesquisa não pode ser vazia"),
+  title: z.string().trim().min(1, "A pesquisa não pode ser vazia"),
 });
 export function Navbar() {
-  const { register, handleSubmit, reset, formState: {errors} } = useForm({ resolver: zodResolver(searchSchema)});
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm({ resolver: zodResolver(searchSchema) });
   const navigate = useNavigate();
   function onSearch(data) {
     const { title } = data;
     reset();
     navigate(`/search/${title}`);
+  }
+
+  function goAuth() {
+    navigate("/auth");
   }
   return (
     <>
@@ -34,10 +44,13 @@ export function Navbar() {
         <Link to="/">
           <ImageLogo src={logo} alt="Logo do Breaking News" />
         </Link>
-
-        <Button>Entrar</Button>
+        <Link to="/auth">
+          <Button type="button" text={"Entrar"}>
+            Entrar
+          </Button>
+        </Link>
       </Nav>
-      { errors.title && <ErrorSpam>{errors.title.message} </ErrorSpam> }
+      {errors.title && <ErrorSpam>{errors.title.message} </ErrorSpam>}
       <Outlet />
     </>
   );
