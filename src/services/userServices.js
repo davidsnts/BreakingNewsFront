@@ -1,7 +1,8 @@
 import axios from "axios";
 const baseURL = "http://localhost:3001";
+import Cookies from "js-cookie";
 
-export function signUp(data) {
+export async function signUp(data) {
   delete data.confirmPassword;
 
   const body = {
@@ -10,7 +11,19 @@ export function signUp(data) {
     avatar: "https://i.imgur.com/xmI2QAo.jpg",
     background: "https://i.imgur.com/2OeZQ.jpg",
   };
-  const response = axios.post(`${baseURL}/user/create`, body);
+  const response = await axios.post(`${baseURL}/user/create`, body);
+  return response;
+}
+
+export async function signin(data) {
+  const response = await axios.post(`${baseURL}/auth/login`, data);
+  return response;
+}
+
+export async function userLogged() {
+  const response = await axios.get(`${baseURL}/user/findById`, {
+    headers: { Authorization: `Bearer ${Cookies.get("token")}` },
+  });
   return response;
 }
 

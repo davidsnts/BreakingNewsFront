@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import Cookies from "js-cookie";
 
 import { Card } from "../../components/Card/Card";
 import { Navbar } from "../../components/Navbar/Navbar";
@@ -19,7 +20,7 @@ export default function Home() {
   }
 
   useEffect(() => {
-    findPosts();
+    findPosts();   
   }, []);
 
   return (
