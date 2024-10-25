@@ -2,13 +2,12 @@ import { Outlet, useNavigate, Link } from "react-router-dom";
 import logo from "../../images/LogoBN.png";
 import { ErrorSpam, ImageLogo, InputSpace, Nav } from "./NavbarStyled";
 import { useForm } from "react-hook-form";
-import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "../Button/button";
+import { searchSchema } from "../../schemas/searchSchema";
 
-const searchSchema = z.object({
-  title: z.string().trim().min(1, "A pesquisa não pode ser vazia"),
-});
+
+
 export function Navbar() {
   const {
     register,
