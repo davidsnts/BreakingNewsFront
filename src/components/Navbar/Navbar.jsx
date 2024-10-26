@@ -14,11 +14,11 @@ import { searchSchema } from "../../schemas/searchSchema";
 import { userLogged } from "../../services/userServices";
 import { useContext, useEffect } from "react";
 import Cookies from "js-cookie";
-import {UserContext} from "../../Context/UserContext";
+import { UserContext } from "../../Context/UserContext";
 
 export function Navbar() {
   const navigate = useNavigate();
-  const { user, setUser} = useContext(UserContext);
+  const { user, setUser } = useContext(UserContext);
 
   const {
     register,
@@ -72,12 +72,13 @@ export function Navbar() {
 
         {Cookies.get("token") && user ? (
           <>
-            <Link to="/profile">
-              <UserLoggedSpace>
+            <UserLoggedSpace>
+              <Link to="/profile" style={{ textDecoration: `none` }}>
                 <h2>{user.name}</h2>
-              </UserLoggedSpace>
-            </Link>
-            <i className="bi bi-box-arrow-right" onClick={signOut}></i>
+              </Link>
+              <i className="bi bi-box-arrow-right" onClick={signOut}></i>
+            </UserLoggedSpace>
+            
           </>
         ) : (
           <Link to="/auth">

@@ -17,3 +17,12 @@ export async function searchPosts(title){
   const response = await axios.get(`${baseURL}/posts/search?title=${title}`);    
   return response;
 }
+
+export function getAllPostsByUser() {
+  const response = axios.get(`${baseURL}/posts/byUserId`, {
+    headers: {
+      Authorization: `Bearer ${Cookies.get("token")}`,
+    },
+  });
+  return response;
+}
