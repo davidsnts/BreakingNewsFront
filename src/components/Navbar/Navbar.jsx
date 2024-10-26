@@ -1,7 +1,7 @@
-import { Outlet, useNavigate, Link } from "react-router-dom";
+import { Link, Outlet, useNavigate } from "react-router-dom";
 import logo from "../../images/LogoBN.png";
 import {
-  ErrorSpam,
+  ErrorSpan,
   ImageLogo,
   InputSpace,
   Nav,
@@ -9,48 +9,49 @@ import {
 } from "./NavbarStyled";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Button } from "../Button/button";
+import { Button } from "../Button/Button";
 import { searchSchema } from "../../schemas/searchSchema";
 import { userLogged } from "../../services/userServices";
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import Cookies from "js-cookie";
 import { UserContext } from "../../Context/UserContext";
 
 export function Navbar() {
-  const navigate = useNavigate();
-  const { user, setUser } = useContext(UserContext);
-
   const {
     register,
     handleSubmit,
     reset,
     formState: { errors },
-  } = useForm({ resolver: zodResolver(searchSchema) });
+  } = useForm({
+    resolver: zodResolver(searchSchema),
+  });
+  const navigate = useNavigate();
+  const { user, setUser } = useContext(UserContext);
 
-  function signOut() {
+  function onSearch(data) {
+    const { title } = data;
+    navigate(`/search/${title}`);
+    reset();
+  }
+  async function findUserLogged() {
+    try {
+      const response = await userLogged();
+      setUser(response.data);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  function signout() {
     Cookies.remove("token");
     setUser(undefined);
     navigate("/");
   }
 
-  function onSearch(data) {
-    const { title } = data;
-    reset();
-    navigate(`/search/${title}`);
-  }
-
-  async function findUserLogged() {
-    try {
-      const response = await userLogged();
-      setUser(response.data);
-    } catch (err) {
-      console.log(err);
-    }
-  }
-
   useEffect(() => {
     if (Cookies.get("token")) findUserLogged();
   }, []);
+
   return (
     <>
       <Nav>
@@ -59,6 +60,7 @@ export function Navbar() {
             <button type="submit">
               <i className="bi bi-search"></i>
             </button>
+
             <input
               {...register("title")}
               type="text"
@@ -66,29 +68,28 @@ export function Navbar() {
             />
           </InputSpace>
         </form>
+
         <Link to="/">
           <ImageLogo src={logo} alt="Logo do Breaking News" />
         </Link>
 
-        {Cookies.get("token") && user ? (
-          <>
-            <UserLoggedSpace>
-              <Link to="/profile" style={{ textDecoration: `none` }}>
-                <h2>{user.name}</h2>
-              </Link>
-              <i className="bi bi-box-arrow-right" onClick={signOut}></i>
-            </UserLoggedSpace>
-            
-          </>
+        {user ? (
+          <UserLoggedSpace>
+            <Link to="/profile"  style={{textDecoration: 'none'}}>
+              <h2>{user.name}</h2>
+            </Link>
+
+            <i className="bi bi-box-arrow-right" onClick={signout}></i>
+          </UserLoggedSpace>
         ) : (
           <Link to="/auth">
-            <Button type="button" text={"Entrar"}>
+            <Button type="button" text="Entrar">
               Entrar
             </Button>
           </Link>
         )}
       </Nav>
-      {errors.title && <ErrorSpam>{errors.title.message} </ErrorSpam>}
+      {errors.title && <ErrorSpan>{errors.title.message}</ErrorSpan>}
       <Outlet />
     </>
   );

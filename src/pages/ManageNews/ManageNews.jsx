@@ -71,8 +71,11 @@ export function ManageNews() {
   return (
     <AddNewsContainer>
       <h2>
-        {action === "add"? "Adicionar": action === "edit"? "Atualizar": "Apagar"}
-        {" "}
+        {action === "add"
+          ? "Adicionar"
+          : action === "edit"
+          ? "Atualizar"
+          : "Apagar"}{" "}
         Notícia
       </h2>
       <form

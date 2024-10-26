@@ -37,12 +37,12 @@ export const InputSpace = styled.div`
     border-radius: 0.3rem;
     padding: 0.5rem;
     cursor: pointer;
-    transition: 0.4s;
+    transition: 0.3s;
+  }
 
-    :hover {
-      background-color: #757575;
-      color: #f5f5f5;
-    }
+  button:hover {
+    background-color: #757575;
+    color: #f5f5f5;
   }
 
   input {
@@ -60,37 +60,16 @@ export const InputSpace = styled.div`
   }
 `;
 
-export const Button = styled.button`
-  background-color: #0bade3;
-  border: none;
-  outline: none;
-  font-size: 1rem;
-  padding: 0.4rem 1rem;
-  color: #fff;
-  transition: all 0.4s ease-in-out;
-  cursor: pointer;
-  border-radius: 0.3rem;
-  font-family: Roboto, arial;
-  /* width: 40%; */
-  font-weight: 500;
-  letter-spacing: 0.1rem;
-  text-transform: uppercase;
-
-  :hover {
-    background-color: #0a86af;
-  }
-`;
-
-export const ErrorSpam = styled.span`
-  background-color: #fcc3c3;
-  color:#9e0000;
-  padding:.5rem;
-  display:flex;
+export const ErrorSpan = styled.span`
+  background-color: #ffcdcd;
+  color: #9e0000;
+  padding: 0.5rem;
+  display: flex;
   justify-content: center;
   font-size: 1rem;
-  /* font-weight:bold; */
   border-radius: 7px;
-`
+`;
+
 export const UserLoggedSpace = styled.div`
   display: flex;
   align-items: center;

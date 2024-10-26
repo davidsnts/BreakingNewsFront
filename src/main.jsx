@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import { Navbar } from "./components/Navbar/Navbar";
 import Home from "./pages/Home/Home";
 import { Search } from "./pages/Search/Search";
@@ -29,15 +29,15 @@ const router = createBrowserRouter([
         path: "/profile",
         element: <Profile />,
       },
+      {
+        path: "/manage-news/:action/:id",
+        element: <ManageNews />,
+      },
     ],
   },
   {
     path: "/auth",
     element: <Authentication />,
-  },
-  {
-    path: "/manage-news/:action/:id",
-    element: <ManageNews />,
   },
 ]);
 

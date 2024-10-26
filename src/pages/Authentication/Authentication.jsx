@@ -4,7 +4,7 @@ import { Button } from "../../components/Button/button";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { signInSchema } from "../../schemas/signInSchema";
-import { ErrorSpam } from "../../components/Navbar/NavbarStyled";
+import { ErrorSpan } from "../../components/Navbar/NavbarStyled";
 import { signUpSchema } from "../../schemas/signUpSchema";
 import { signin, signUp } from "../../services/userServices";
 import { useNavigate } from "react-router-dom";
@@ -55,7 +55,7 @@ export function Authentication() {
           />
 
           {errorsSignin.email && (
-            <ErrorSpam> {errorsSignin.email.message}</ErrorSpam>
+            <ErrorSpan> {errorsSignin.email.message}</ErrorSpan>
           )}
           <Input
             type="password"
@@ -65,7 +65,7 @@ export function Authentication() {
           />
 
           {errorsSignin.password && (
-            <ErrorSpam> {errorsSignin.password.message}</ErrorSpam>
+            <ErrorSpan> {errorsSignin.password.message}</ErrorSpan>
           )}
           <Button type="submit" text="Entrar" />
         </form>
@@ -80,7 +80,7 @@ export function Authentication() {
             register={registerSignUp}
           />
           {errorsSignup.name && (
-            <ErrorSpam> {errorsSignup.name.message}</ErrorSpam>
+            <ErrorSpan> {errorsSignup.name.message}</ErrorSpan>
           )}
           <Input
             type="email"
@@ -89,7 +89,7 @@ export function Authentication() {
             register={registerSignUp}
           />
           {errorsSignup.email && (
-            <ErrorSpam> {errorsSignup.email.message}</ErrorSpam>
+            <ErrorSpan> {errorsSignup.email.message}</ErrorSpan>
           )}
           <Input
             type="password"
@@ -99,7 +99,7 @@ export function Authentication() {
           />
 
           {errorsSignup.password && (
-            <ErrorSpam> {errorsSignup.password.message}</ErrorSpam>
+            <ErrorSpan> {errorsSignup.password.message}</ErrorSpan>
           )}
           <Input
             type="password"
@@ -108,7 +108,7 @@ export function Authentication() {
             register={registerSignUp}
           />
           {errorsSignup.confirmPassword && (
-            <ErrorSpam> {errorsSignup.confirmPassword.message}</ErrorSpam>
+            <ErrorSpan> {errorsSignup.confirmPassword.message}</ErrorSpan>
           )}
           <Button type="submit" text="Cadastrar" />
         </form>
