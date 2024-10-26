@@ -1,16 +1,25 @@
 import { Outlet, useNavigate, Link } from "react-router-dom";
 import logo from "../../images/LogoBN.png";
-import { ErrorSpam, ImageLogo, InputSpace, Nav, UserLoggedSpace } from "./NavbarStyled";
+import {
+  ErrorSpam,
+  ImageLogo,
+  InputSpace,
+  Nav,
+  UserLoggedSpace,
+} from "./NavbarStyled";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "../Button/button";
 import { searchSchema } from "../../schemas/searchSchema";
 import { userLogged } from "../../services/userServices";
-import { useEffect } from "react";
+import { useContext, useEffect } from "react";
 import Cookies from "js-cookie";
-import { useState } from "react";
+import {UserContext} from "../../Context/UserContext";
 
 export function Navbar() {
+  const navigate = useNavigate();
+  const { user, setUser} = useContext(UserContext);
+
   const {
     register,
     handleSubmit,
@@ -18,13 +27,11 @@ export function Navbar() {
     formState: { errors },
   } = useForm({ resolver: zodResolver(searchSchema) });
 
-  function signOut(){
+  function signOut() {
     Cookies.remove("token");
-    setUser(undefined)
+    setUser(undefined);
+    navigate("/");
   }
-
-  const navigate = useNavigate();
-  const [user, setUser] = useState({});
 
   function onSearch(data) {
     const { title } = data;
@@ -64,10 +71,14 @@ export function Navbar() {
         </Link>
 
         {Cookies.get("token") && user ? (
-          <UserLoggedSpace>
-            <h2>{user.name}</h2>
-            <i className="bi bi-box-arrow-right" onClick={signOut} ></i>
-          </UserLoggedSpace>
+          <>
+            <Link to="/profile">
+              <UserLoggedSpace>
+                <h2>{user.name}</h2>
+              </UserLoggedSpace>
+            </Link>
+            <i className="bi bi-box-arrow-right" onClick={signOut}></i>
+          </>
         ) : (
           <Link to="/auth">
             <Button type="button" text={"Entrar"}>

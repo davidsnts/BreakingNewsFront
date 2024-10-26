@@ -7,12 +7,14 @@ import { Search } from "./pages/Search/Search";
 import { GlobalStyled } from "./GlobalStyled";
 import ErrorPage from "./pages/ErrorPage/ErrorPage";
 import { Authentication } from "./pages/Authentication/Authentication";
+import { Profile } from "./pages/Profile/Profile";
+import UserProvider from "./Context/UserContext";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Navbar />,
-    errorElement: <ErrorPage /> ,
+    errorElement: <ErrorPage />,
     children: [
       {
         path: "/",
@@ -22,17 +24,23 @@ const router = createBrowserRouter([
         path: "/search/:title",
         element: <Search />,
       },
+      {
+        path: "/profile",
+        element: <Profile />,
+      },
     ],
   },
   {
     path: "/auth",
-    element: <Authentication />
-  }
+    element: <Authentication />,
+  },
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <GlobalStyled />
-    <RouterProvider router={router} />
+    <UserProvider>
+      <RouterProvider router={router} />
+    </UserProvider>
   </React.StrictMode>
 );
